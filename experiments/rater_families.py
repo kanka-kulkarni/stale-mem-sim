@@ -283,7 +283,7 @@ def stage_report_impl() -> None:
 
 
 CONFUSION_NAMES = {"3b": "Qwen2.5-3B", "7b": "Qwen2.5-7B", "14b": "Qwen2.5-14B",
-                   "llama8b": "Llama-3.1-8B", "qwen35": "Qwen3.5-9B think-off (post hoc)",
+                   "llama8b": "Llama-3.1-8B", "qwen35": "Qwen3.5-9B think-off",
                    "gemma4": "Gemma 4 E4B think-off", "phi4mini": "Phi-4-mini",
                    "granite": "Granite 4.1 8B", "qwen3": "Qwen3-8B think-off"}
 
