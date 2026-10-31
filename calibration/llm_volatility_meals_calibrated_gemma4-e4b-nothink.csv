@@ -1,0 +1,10 @@
+domain,attribute,volatility,rating,valid,rate,latency_s,prompt_tokens,completion_tokens,cached,model
+meals_calibrated,household_size,slow,1,True,0.03,4.260257699992508,110,7,False,gemma4:e4b [think off]
+meals_calibrated,weekly_grocery_budget,slow,2,True,0.09,4.275137499906123,103,7,False,gemma4:e4b [think off]
+meals_calibrated,cooking_time_weeknights,fast,2,True,0.09,4.244334700051695,113,7,False,gemma4:e4b [think off]
+meals_calibrated,pantry_staples,fast,2,True,0.09,4.263926499988884,111,7,False,gemma4:e4b [think off]
+meals_calibrated,appliances,slow,1,True,0.03,4.179443599889055,109,7,False,gemma4:e4b [think off]
+meals_calibrated,cuisine_likes,slow,2,True,0.09,4.243302799994126,105,7,False,gemma4:e4b [think off]
+meals_calibrated,nearby_stores,slow,2,True,0.09,4.238347300095484,108,7,False,gemma4:e4b [think off]
+meals_calibrated,shopping_day,fast,2,True,0.09,4.1675391998142,103,7,False,gemma4:e4b [think off]
+meals_calibrated,dietary_choice,slow,1,True,0.03,4.306621900061145,102,7,False,gemma4:e4b [think off]

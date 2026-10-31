@@ -1,0 +1,7 @@
+domain,attribute,volatility,rating,valid,rate,latency_s,prompt_tokens,completion_tokens,cached,model
+commute,home_area,slow,1,True,0.03,4.5815081999171525,107,7,False,gemma4:e4b [think off]
+commute,work_location,slow,2,True,0.09,4.354902100050822,107,7,False,gemma4:e4b [think off]
+commute,office_days,fast,2,True,0.09,4.265006500063464,107,7,False,gemma4:e4b [think off]
+commute,has_car,slow,1,True,0.03,4.1920583001337945,100,7,False,gemma4:e4b [think off]
+commute,weekly_budget,slow,2,True,0.09,4.317079100059345,102,7,False,gemma4:e4b [think off]
+commute,preferred_language,static,0,True,0.0,4.208303600084037,104,7,False,gemma4:e4b [think off]

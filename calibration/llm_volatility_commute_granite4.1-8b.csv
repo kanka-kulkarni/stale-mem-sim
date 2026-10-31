@@ -1,0 +1,7 @@
+domain,attribute,volatility,rating,valid,rate,latency_s,prompt_tokens,completion_tokens,cached,model
+commute,home_area,slow,2,True,0.09,5.470699500059709,102,7,False,granite4.1:8b
+commute,work_location,slow,2,True,0.09,5.095139699988067,102,7,False,granite4.1:8b
+commute,office_days,fast,2,True,0.09,5.232823000056669,102,7,False,granite4.1:8b
+commute,has_car,slow,2,True,0.09,5.164936400018632,95,7,False,granite4.1:8b
+commute,weekly_budget,slow,2,True,0.09,5.184645400149748,97,7,False,granite4.1:8b
+commute,preferred_language,static,2,True,0.09,5.073300800053403,99,7,False,granite4.1:8b

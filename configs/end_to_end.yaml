@@ -1,0 +1,36 @@
+name: end_to_end
+description: >
+  An LLM writes the answer from each policy's memory (Section 5.4, Appendix H); scored by
+  self-agreement with the same model's answer from the true state. 20 held-out users x 20
+  sessions. Replayed from calibration/llm_cache.jsonl; uncached prompts need Ollama.
+  Run main and per_session_llm first: matched policies use their tuned settings.
+
+stages:
+  determinism:
+    description: repeat agreement of the answerer at temperature 0 (bypasses the cache, needs Ollama)
+    module: experiments.e2e
+    args:
+      positional: [determinism]
+  qwen7b:
+    description: Qwen2.5-7B answerer, all policies
+    module: experiments.e2e
+    args:
+      positional: [run]
+    runs:
+      - {domain: commute}
+      - {domain: meals_calibrated}
+  qwen14b:
+    description: Qwen2.5-14B answerer, meal planning, a subset of policies
+    module: experiments.e2e
+    args:
+      positional: [run]
+      domain: meals_calibrated
+      model: "qwen2.5:14b"
+      policies: [never, always, always_all, "sxi[coarse]@0.25", "sxi[coarse]@0.5", oracle]
+      out_name: e2e_meals_calibrated_14b
+  per_task:
+    description: per-task agreement of the answerer with the decision rules (no model calls)
+    module: experiments.e2e_descriptive
+    runs:
+      - {domain: commute}
+      - {domain: meals_calibrated}

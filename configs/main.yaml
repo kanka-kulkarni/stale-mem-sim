@@ -1,0 +1,43 @@
+name: main
+description: >
+  Main comparison at matched question cost (Table 1, appendix curves and tables).
+  Every policy is tuned on tuning seeds to 25/50/75% of Always's questions and evaluated
+  on held-out seeds: 5 seeds x 50 users = 250 users x 20 sessions. Rule-based; no model calls.
+
+common: &common
+  users: 50               # per seed
+  sessions: 20
+  seeds: [0, 1, 2, 3, 4]  # held-out users (all reported numbers)
+  tune_seeds: [1000, 1001, 1002, 1003, 1004]
+  cost_levels: [0.25, 0.5, 0.75]
+  multipliers: [0.5, 1.0, 2.0]   # true change-rate multipliers (plus misspecified-rate conditions)
+
+stages:
+  commute:
+    description: all policy families, commute
+    module: experiments.m2
+    args:
+      <<: *common
+      domain: commute
+      llm_impact: calibration/llm_impact_commute_qwen2.5-7b.csv
+  meals:
+    description: all policy families, meal planning with VitaBench-calibrated rates (main text)
+    module: experiments.m2
+    args:
+      <<: *common
+      domain: meals_calibrated
+      llm_impact: calibration/llm_impact_meals_qwen2.5-7b.csv
+  meals_default_rates:
+    description: meal planning with default class rates (appendix)
+    module: experiments.m2
+    args:
+      <<: *common
+      domain: meals
+      llm_impact: calibration/llm_impact_meals_qwen2.5-7b.csv
+  baselines:
+    description: oracle, Always-all and information gain, for every condition above
+    module: experiments.baselines
+    runs:
+      - {domain: commute}
+      - {domain: meals_calibrated}
+      - {domain: meals}

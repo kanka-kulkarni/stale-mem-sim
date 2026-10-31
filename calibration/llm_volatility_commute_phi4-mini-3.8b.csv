@@ -1,0 +1,7 @@
+domain,attribute,volatility,rating,valid,rate,latency_s,prompt_tokens,completion_tokens,cached,model
+commute,home_area,slow,1,True,0.03,3.899241999955848,97,7,False,phi4-mini:3.8b
+commute,work_location,slow,1,True,0.03,3.6995884000789374,97,7,False,phi4-mini:3.8b
+commute,office_days,fast,1,True,0.03,3.6778275000397116,97,7,False,phi4-mini:3.8b
+commute,has_car,slow,1,True,0.03,3.612360400147736,90,7,False,phi4-mini:3.8b
+commute,weekly_budget,slow,1,True,0.03,3.564336200011894,92,7,False,phi4-mini:3.8b
+commute,preferred_language,static,1,True,0.03,3.6773874000646174,94,7,False,phi4-mini:3.8b

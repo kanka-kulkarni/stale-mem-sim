@@ -1,0 +1,10 @@
+domain,attribute,volatility,rating,valid,rate,latency_s,prompt_tokens,completion_tokens,cached,model
+meals_calibrated,household_size,slow,2,True,0.09,5.069893700070679,108,7,False,llama3.1:8b
+meals_calibrated,weekly_grocery_budget,slow,2,True,0.09,4.933530099922791,100,7,False,llama3.1:8b
+meals_calibrated,cooking_time_weeknights,fast,2,True,0.09,5.147381399990991,108,7,False,llama3.1:8b
+meals_calibrated,pantry_staples,fast,2,True,0.09,5.0730977999046445,108,7,False,llama3.1:8b
+meals_calibrated,appliances,slow,2,True,0.09,5.155951699940488,110,7,False,llama3.1:8b
+meals_calibrated,cuisine_likes,slow,2,True,0.09,4.826851699966937,103,7,False,llama3.1:8b
+meals_calibrated,nearby_stores,slow,2,True,0.09,5.054765299893916,105,7,False,llama3.1:8b
+meals_calibrated,shopping_day,fast,2,True,0.09,4.854273099917918,101,7,False,llama3.1:8b
+meals_calibrated,dietary_choice,slow,2,True,0.09,4.782324900152162,99,7,False,llama3.1:8b

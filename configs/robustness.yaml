@@ -1,0 +1,17 @@
+name: robustness
+description: >
+  Robustness analyses (Section 5.5, Appendix I), both domains, rule-based (no model calls):
+  S1 users whose change rates differ (with rates learned per user), S2 users who sometimes
+  answer wrongly, S3 stronger or weaker life events. About 4 minutes per analysis.
+
+stages:
+  s1:
+    description: per-user change rates (gamma, several coefficients of variation)
+    module: experiments.realism
+    args:
+      positional: [s1]
+  s2_s3:
+    description: wrong answers (S2, with the added error levels) and life-event strength (S3)
+    module: experiments.realism
+    args:
+      positional: [s2, s3, s2added, crossing]

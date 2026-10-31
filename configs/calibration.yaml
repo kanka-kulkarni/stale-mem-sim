@@ -1,0 +1,17 @@
+name: calibration
+description: >
+  Change-rate statistics from real datasets, which are not redistributed. Download them
+  first and set the paths below. Only aggregate counts are written.
+
+stages:
+  vitabench:
+    description: per-category preference change rates from VitaBench 2.0 (the calibrated meal-planning rates)
+    module: calibration.vitabench_rates
+    args:
+      tasks: data/vitabench/tasks.json   # https://huggingface.co/datasets/meituan-longcat/VitaBench-2.0
+  instacart:
+    description: real vs shuffled change rates of order-history facts (Kaggle account, non-commercial use)
+    module: calibration.instacart_rates
+    args:
+      data: data/instacart               # folder with the Instacart CSV files
+      window: 5

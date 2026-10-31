@@ -1,0 +1,16 @@
+name: quickstart
+description: >
+  Four policies on 10 simulated users x 20 sessions of meal planning (under a second).
+  Prints accuracy and questions per session and checks the paired design.
+
+stages:
+  run:
+    description: never, always, TTL and staleness x impact with the dependency list
+    module: experiments.run
+    args:
+      domain: meals_calibrated
+      policies: [never, always, "ttl(3)", "sxi(0.05,coarse)"]
+      users: 10
+      sessions: 20
+      seeds: [0]
+      out: results/quickstart

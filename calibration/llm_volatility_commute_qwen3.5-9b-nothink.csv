@@ -1,0 +1,7 @@
+domain,attribute,volatility,rating,valid,rate,latency_s,prompt_tokens,completion_tokens,cached,model
+commute,home_area,slow,1,True,0.03,58.020280400058255,110,7,False,qwen3.5:9b [think off]
+commute,work_location,slow,2,True,0.09,6.271590300137177,110,7,False,qwen3.5:9b [think off]
+commute,office_days,fast,1,True,0.03,6.3873145000543445,110,7,False,qwen3.5:9b [think off]
+commute,has_car,slow,1,True,0.03,6.218716199975461,103,7,False,qwen3.5:9b [think off]
+commute,weekly_budget,slow,2,True,0.09,6.17877020011656,105,7,False,qwen3.5:9b [think off]
+commute,preferred_language,static,1,True,0.03,6.0885244000237435,107,7,False,qwen3.5:9b [think off]

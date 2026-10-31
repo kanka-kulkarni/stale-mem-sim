@@ -1,0 +1,45 @@
+name: llm_ratings
+description: >
+  One-off LLM ratings: relevance of every task-fact pair (87 calls per model) and change
+  rate of every fact (15 calls per model). Ollama, temperature 0, seed 0, default 4-bit
+  tags. Replies are replayed from calibration/llm_cache.jsonl; Ollama is needed only for
+  prompts that are not cached. Writes calibration/llm_impact_*.csv and llm_volatility_*.csv.
+
+stages:
+  relevance:
+    description: 0-3 relevance rating per task-fact pair
+    module: experiments.rate_impacts
+    runs:
+      - {domain: commute, model: "qwen2.5:3b"}
+      - {domain: commute, model: "qwen2.5:7b"}
+      - {domain: commute, model: "qwen2.5:14b"}
+      - {domain: commute, model: "llama3.1:8b"}
+      - {domain: commute, model: "qwen3.5:9b", no_think: true}
+      - {domain: commute, model: "gemma4:e4b", no_think: true}
+      - {domain: commute, model: "phi4-mini:3.8b"}
+      - {domain: commute, model: "granite4.1:8b"}
+      - {domain: commute, model: "qwen3:8b", no_think: true}
+      - {domain: meals, model: "qwen2.5:3b"}
+      - {domain: meals, model: "qwen2.5:7b"}
+      - {domain: meals, model: "qwen2.5:14b"}
+      - {domain: meals, model: "llama3.1:8b"}
+      - {domain: meals, model: "qwen3.5:9b", no_think: true}
+      - {domain: meals, model: "gemma4:e4b", no_think: true}
+      - {domain: meals, model: "phi4-mini:3.8b"}
+      - {domain: meals, model: "granite4.1:8b"}
+      - {domain: meals, model: "qwen3:8b", no_think: true}
+  change_rates:
+    description: 0-3 rating of how often each kind of fact changes
+    module: experiments.rate_volatility
+    args:
+      domain: [commute, meals_calibrated]
+    runs:
+      - {model: "qwen2.5:3b"}
+      - {model: "qwen2.5:7b"}
+      - {model: "qwen2.5:14b"}
+      - {model: "llama3.1:8b"}
+      - {model: "qwen3.5:9b", no_think: true}
+      - {model: "gemma4:e4b", no_think: true}
+      - {model: "phi4-mini:3.8b"}
+      - {model: "granite4.1:8b"}
+      - {model: "qwen3:8b", no_think: true}

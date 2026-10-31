@@ -1,0 +1,50 @@
+name: value_study
+description: >
+  Same selection, different value estimates (Section 5.2-5.3, Figure 2, Appendix E-F):
+  every "has it changed?" source crossed with every "does it matter?" source, LLM-rated
+  relevance and change rates, noisy estimates, the union bound and the error target.
+  No model calls: LLM ratings come from the tables in calibration/. Run
+  per_session_llm first: E1-E2 replay its logged decisions.
+
+stages:
+  e1_e2:
+    description: the value-estimate grid (E1) and ranking quality (E2), about 11 minutes
+    module: experiments.value_study
+    args:
+      domain: [commute, meals_calibrated]
+  e3_e5:
+    description: noisy and over-inclusive estimates (E3), union bound and error target (E4), separability (E5)
+    module: experiments.value_study_e345
+    args:
+      domain: [commute, meals_calibrated]
+  raters:
+    description: staleness x impact and budget with each of the first five raters' relevance tables (Table 3)
+    module: experiments.run
+    args:
+      policies: [never, always]
+      match_families: ["sxi[llm]", "budget[llm]"]
+      users: 50
+      sessions: 20
+      seeds: [0, 1, 2, 3, 4]
+      tune_seeds: [1000, 1001, 1002, 1003, 1004]
+    runs:
+      - {domain: commute, llm_impact: calibration/llm_impact_commute_qwen2.5-3b.csv, out: results/raters/commute_3b}
+      - {domain: commute, llm_impact: calibration/llm_impact_commute_qwen2.5-7b.csv, out: results/raters/commute_7b}
+      - {domain: commute, llm_impact: calibration/llm_impact_commute_qwen2.5-14b.csv, out: results/raters/commute_14b}
+      - {domain: commute, llm_impact: calibration/llm_impact_commute_llama3.1-8b.csv, out: results/raters/commute_llama3.1-8b}
+      - {domain: commute, llm_impact: calibration/llm_impact_commute_qwen3.5-9b-nothink.csv, out: results/raters/commute_qwen3.5-9b-nothink}
+      - {domain: meals_calibrated, llm_impact: calibration/llm_impact_meals_qwen2.5-3b.csv, out: results/raters/meals_calibrated_3b}
+      - {domain: meals_calibrated, llm_impact: calibration/llm_impact_meals_qwen2.5-7b.csv, out: results/raters/meals_calibrated_7b}
+      - {domain: meals_calibrated, llm_impact: calibration/llm_impact_meals_qwen2.5-14b.csv, out: results/raters/meals_calibrated_14b}
+      - {domain: meals_calibrated, llm_impact: calibration/llm_impact_meals_llama3.1-8b.csv, out: results/raters/meals_calibrated_llama3.1-8b}
+      - {domain: meals_calibrated, llm_impact: calibration/llm_impact_meals_qwen3.5-9b-nothink.csv, out: results/raters/meals_calibrated_qwen3.5-9b-nothink}
+  rater_families:
+    description: the four later raters (Gemma 4, Phi-4-mini, Granite 4.1, Qwen3) and LLM-rated change rates
+    module: experiments.rater_families
+    args:
+      positional: [confusion, sims, e1ext, volrow, report]
+  rater_report:
+    description: rater agreement with the dependency lists
+    module: experiments.rater_report
+    args:
+      domains: [commute, meals]

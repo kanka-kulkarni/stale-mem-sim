@@ -1,0 +1,43 @@
+name: per_session_llm
+description: >
+  An LLM chooses which facts to re-check in each session (Section 5.3, Appendix G). The
+  LLM's question cost is estimated on LLM tuning users; every other policy is tuned to that
+  cost on the tuning seeds and all are evaluated on 20 held-out users x 20 sessions.
+  Decisions are replayed from calibration/llm_cache.jsonl; uncached prompts need Ollama
+  (about 6-9 s per call for 7B and 25-30 s for 14B on a laptop CPU).
+
+common: &common
+  sessions: 20
+  llm_tune_seed: 1000
+  tune_seeds: [1000, 1001, 1002, 1003, 1004]
+  tune_users: 50
+  eval_seed: 0
+  eval_users: 20
+
+stages:
+  qwen7b:
+    description: Qwen2.5-7B, plain prompt
+    module: experiments.m3
+    args: {<<: *common, model: "qwen2.5:7b"}
+    runs:
+      - {domain: commute, llm_tune_users: 20, llm_impact: calibration/llm_impact_commute_qwen2.5-7b.csv, out: results/m3_commute_tune20}
+      - {domain: meals_calibrated, llm_tune_users: 10, llm_impact: calibration/llm_impact_meals_qwen2.5-7b.csv, out: results/m3_meals_calibrated}
+  qwen7b_guided:
+    description: Qwen2.5-7B, step-by-step prompt
+    module: experiments.m3
+    args: {<<: *common, model: "qwen2.5:7b", prompt: guided, with_info_gain: true}
+    runs:
+      - {domain: commute, llm_tune_users: 20, llm_impact: calibration/llm_impact_commute_qwen2.5-7b.csv, out: results/m3_commute_guided}
+      - {domain: meals_calibrated, llm_tune_users: 10, llm_impact: calibration/llm_impact_meals_qwen2.5-7b.csv, out: results/m3_meals_calibrated_guided}
+  qwen14b:
+    description: Qwen2.5-14B, plain prompt (the llm-impact families keep the 7B table)
+    module: experiments.m3
+    args: {<<: *common, model: "qwen2.5:14b", llm_tune_users: 20}
+    runs:
+      - {domain: commute, llm_impact: calibration/llm_impact_commute_qwen2.5-7b.csv, out: results/m3_commute_14b}
+      - {domain: meals_calibrated, llm_impact: calibration/llm_impact_meals_qwen2.5-7b.csv, out: results/m3_meals_calibrated_14b}
+  qwen7b_commute_10_tuning_users:
+    description: the first commute run, with the LLM's cost estimated on 10 tuning users (also reported)
+    module: experiments.m3
+    args: {<<: *common, model: "qwen2.5:7b", domain: commute, llm_tune_users: 10,
+           llm_impact: calibration/llm_impact_commute_qwen2.5-7b.csv, out: results/m3_commute}
