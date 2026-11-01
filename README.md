@@ -1,6 +1,6 @@
 # Re-checking stale user memory: simulator and experiments
 
-Code for the paper *"[title withheld for review]"*, submitted to the NAACL 2027
+Code for the paper *"Is That Still True? Task-Aware Re-Checking of Stale User Memory in LLM Assistants"*, submitted to the NAACL 2027
 Industry Track.
 
 An assistant stores facts about a user. The facts change silently between sessions. Each
