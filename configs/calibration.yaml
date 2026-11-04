@@ -10,7 +10,7 @@ stages:
     args:
       tasks: data/vitabench/tasks.json   # https://huggingface.co/datasets/meituan-longcat/VitaBench-2.0
   instacart:
-    description: real vs shuffled change rates of order-history facts (Kaggle account, non-commercial use)
+    description: real vs shuffled change rates of order-history facts (Instacart 2017 data, non-commercial use)
     module: calibration.instacart_rates
     args:
       data: data/instacart               # folder with the Instacart CSV files

@@ -166,7 +166,9 @@ The datasets are not redistributed. Download them and set their paths in
   held, with 95% Wilson intervals. The resulting rates are written into
   `simulator/domains/meals.py`.
 - **Instacart** (a check for temporal structure in order histories, which found none). The
-  data needs a Kaggle account and is licensed for non-commercial use only.
+  data was released by Instacart in 2017, as described in the
+  [announcement post](https://tech.instacart.com/3-million-instacart-orders-open-sourced-d40d29ead6f2),
+  and is licensed for non-commercial use only.
 
 ## Licence
 
